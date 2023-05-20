@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6 m-auto">
+      <div class="list-form">
+        <h3>Add a new List</h3>
+        <div class="mt-3">
+          <%= simple_form_for @list do |f| %>
+            <%= f.input :name %>
+            <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
