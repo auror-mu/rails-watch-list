@@ -1,14 +1,15 @@
 class BookmarksController < ApplicationController
+  before_action :set_bookmark, only: :destroy
+  before_action :set_list, only: [:new, :create]
+
   def new
     @bookmark = Bookmark.new
-    @list = List.find(params[:id])
   end
 
   def create
-   # @list = Bookmark.find(params[:id])
     @bookmark = Bookmark.new(bookmark_params)
     if @bookmark.save
-      redirect_to bookmark_path(@bookmark)
+      redirect_to list_path(@list)
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,5 +25,13 @@ class BookmarksController < ApplicationController
 
   def bookmark_params
     params.require(:bookmark).permit(comment, list_id, movie_id)
+  end
+
+  def set_bookmark
+    @bookmark = Bookmark.find(params[:id])
+  end
+
+  def set_list
+    @list = List.find(params[:list_id])
   end
 end
